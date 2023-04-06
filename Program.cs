@@ -11,24 +11,10 @@ namespace Library
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthorization();
-            var Conn = builder.Configuration.GetConnectionString("Con1");
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<LibraryDbContext>(options =>
-            {
-                options.UseSqlServer(Conn);
-            });
-            builder.Services.AddCors(corsOption =>
-            {
-                corsOption.AddPolicy("policy1", CorsPolicyBuilder =>
-                {
-                    CorsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-
-                });
-            });
 
             var app = builder.Build();
 
