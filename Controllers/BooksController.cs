@@ -20,7 +20,21 @@ namespace Library.Controllers
             List<Books> books = Db.Books.ToList();
             return Ok(books);
         }
+        [HttpGet]
+        [Route("{name}")]
+        public IActionResult GetBook(String name)
+        {
+            Books book = Db.Books.FirstOrDefault(a => a.Name == name);
+            if (book == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(book);
+            }
+        }
 
-        
+
     }
 }

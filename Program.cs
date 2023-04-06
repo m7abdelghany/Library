@@ -1,5 +1,4 @@
 using Library.Models;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library
@@ -12,6 +11,8 @@ namespace Library
 
             // Add services to the container.
 
+            builder.Services.AddControllers();
+            builder.Services.AddDbContext<LibraryDbContext>(a=>a.UseSqlServer(builder.Configuration.GetConnectionString("Con1")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -24,14 +25,13 @@ namespace Library
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors("policy1");
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-          
-
-            
+            app.UseCors();
+            app.MapControllers();
 
             app.Run();
         }
