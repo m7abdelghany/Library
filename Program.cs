@@ -1,4 +1,5 @@
 using Library.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library
@@ -16,6 +17,13 @@ namespace Library
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(CorsOption =>
+            {
+                CorsOption.AddPolicy("Pol1", CorsPolicyBuilder =>
+                {
+                    CorsPolicyBuilder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+            });
+            });
 
             var app = builder.Build();
 
@@ -30,7 +38,7 @@ namespace Library
 
             app.UseAuthorization();
 
-            app.UseCors();
+            app.UseCors("Pol1");
             app.MapControllers();
 
             app.Run();
