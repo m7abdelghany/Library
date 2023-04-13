@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 
 #nullable disable
 
@@ -30,14 +29,17 @@ namespace Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"), 1L, 1);
 
+                    b.Property<string>("BriefDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Cataegory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Data")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.HasKey("BookId");
 

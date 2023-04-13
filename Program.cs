@@ -33,10 +33,11 @@ namespace Library
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
-
+            
             app.UseAuthorization();
+            
 
             app.UseCors("Pol1");
             app.MapControllers();

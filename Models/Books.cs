@@ -8,6 +8,7 @@ namespace Library.Models
         public int BookId { get; set; }
         public string Name { get; set; }
         public string Cataegory { get; set; }
-        public byte[] Data { get; set; }
+        public string BriefDescription { get; set; }
+        public float Rating { get; set; }
     }
 }
