@@ -23,27 +23,16 @@ namespace Library.Controllers
            List< HomeView> home = new List<HomeView>();
             foreach (var book in Book)
             {
-                // Get the path to the image file in the wwwroot folder
-                string Path = _hostEnvironment.WebRootPath+"\\img\\";
-                string filePath = Path + book.Name + ".jpg";
-                
-                // Check if the file exists
-                if (!System.IO.File.Exists(filePath))
-                {
-                    return NotFound();
-                }
-
-                //Determine the content type based on the file extension
-
-
-                byte[] b = System.IO.File.ReadAllBytes(filePath);
-                // Return the image file as a FileStreamResult
+    
+               
+         
 
                 HomeView homeView = new HomeView()
                 {
                     BookName = book.Name,
                     Rating = book.Rating,
-                    Image = File(b, "image/png")
+                    Image = book.ImgUrl ,
+                    Description =book.BriefDescription
                 };
                 home.Add(homeView);
             }

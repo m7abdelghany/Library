@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Models
 {
-    public class LibraryDbContext : DbContext
+    public class LibraryDbContext : IdentityDbContext<ApplicationUser>
     {
         public LibraryDbContext()
         {

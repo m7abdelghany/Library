@@ -10,5 +10,8 @@ namespace Library.Models
         public string Cataegory { get; set; }
         public string BriefDescription { get; set; }
         public float Rating { get; set; }
+        public string ImgUrl { set; get; }
+        
     }
 }
+
