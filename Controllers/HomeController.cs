@@ -32,7 +32,7 @@ namespace Library.Controllers
                 {
                     BookName = book.Name,
                     Rating = book.Rating,
-                    Image = $"{Request.Scheme}://{Request.Host}/img/{book.Name}" ,
+                    Image = $"{Request.Scheme}://{Request.Host}/img/{book.Name}.jpg" ,
                     Description =book.BriefDescription
                 };
                 home.Add(homeView);
