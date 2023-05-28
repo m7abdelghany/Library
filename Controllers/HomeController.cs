@@ -39,6 +39,27 @@ namespace Library.Controllers
             }
             return Ok(home);
         }
+        [HttpGet("book")]
+        public IActionResult GetOneBook(string BookName)
+        {
+            var book = Db.Books.FirstOrDefault(a=>a.Name== BookName);
+            if (book is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                BookDto bookFound = new BookDto()
+                {
+                    BookName = book.Name,
+                    Rating = book.Rating,
+                    Image = $"{Request.Scheme}://{Request.Host}/img/{book.Name}.jpg",
+                    Description = book.BriefDescription ,
+                    PDF = $"{Request.Scheme}://{Request.Host}/img/{book.Name}.pdf" 
+                };
+                return Ok(bookFound);
+            }
+        }
         
 
         //pdf
