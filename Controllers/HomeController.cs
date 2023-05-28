@@ -19,19 +19,20 @@ namespace Library.Controllers
         [HttpGet]
         public IActionResult GetBooks()
         {
+            
            var Book = Db.Books.ToList();
            List< HomeView> home = new List<HomeView>();
             foreach (var book in Book)
             {
-    
-               
-         
+
+                
+                
 
                 HomeView homeView = new HomeView()
                 {
                     BookName = book.Name,
                     Rating = book.Rating,
-                    Image = book.ImgUrl ,
+                    Image = $"{Request.Scheme}://{Request.Host}/img/{book.Name}" ,
                     Description =book.BriefDescription
                 };
                 home.Add(homeView);
