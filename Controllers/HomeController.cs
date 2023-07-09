@@ -55,7 +55,7 @@ namespace Library.Controllers
                     Rating = book.Rating,
                     Image = $"{Request.Scheme}://{Request.Host}/img/{book.Name}.jpg",
                     Description = book.BriefDescription ,
-                    PDF = $"{Request.Scheme}://{Request.Host}/img/{book.Name}.pdf" 
+                    PDF = $"{Request.Scheme}://{Request.Host}/Books/{book.Name}.pdf" 
                 };
                 return Ok(bookFound);
             }
