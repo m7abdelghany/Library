@@ -136,6 +136,22 @@ namespace Library.Controllers
                 return Ok(bookView);
             }
         }
+        [HttpGet("AllAuthors")]
+        public IActionResult GetAllAuthors()
+        {
+            var GetAuths = Db.Authors.ToList();
+            List<AllAuthorsDto> Authors = new List<AllAuthorsDto>();
+            foreach (var auth in GetAuths)
+            {
+                AllAuthorsDto authorsDto = new AllAuthorsDto()
+                {
+                    AuthorName = auth.Authorname,
+                    AuthorIMG = "link lsora"
+                };
+                Authors.Add(authorsDto);
+            }
+            return Ok(Authors);
+        }
         
 
         //pdf
