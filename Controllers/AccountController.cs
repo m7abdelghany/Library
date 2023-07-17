@@ -1,5 +1,6 @@
 ﻿using Library.DTO;
 using Library.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,24 +16,43 @@ namespace Library.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public AccountController(UserManager<ApplicationUser> _userManager, IConfiguration _configuration)
+        public AccountController(UserManager<ApplicationUser> _userManager, IConfiguration _configuration,IWebHostEnvironment _webHostEnvironment)
         {
             this.userManager = _userManager;
             this.configuration = _configuration;
+            this.webHostEnvironment = _webHostEnvironment;
+        }
+        [HttpPost("USerImgUpload")]
+        [Authorize]
+        public async Task<IActionResult> UploadImgAsync(IFormFile img)
+        {
+            if(img is not null && img.Length > 0)
+            {
+                var UploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "UserImg");
+                var FileName = userManager.GetUserName(User) + Path.GetExtension(img.FileName);
+                var FilePath = Path.Combine(UploadFolder, FileName);
+                using (var FileStream = new FileStream(FilePath, FileMode.Create))
+                {
+                    img.CopyTo(FileStream);
+                }
+                return Ok();
+            }
+            else { return BadRequest(); }
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Registration(RegisterUserDto userDto)
+        public async Task<IActionResult> Registration(RegisterUserDto userDto )
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new ApplicationUser();
+                
                 user.UserName = userDto.UserName;
                 user.Email = userDto.Email;
                 user.PhoneNumber = userDto.Phone;
                 user.Gender = userDto.Gender;
                 user.Age = userDto.Age;
-                user.ImgUrl= userDto.ImgUrl;
                 IdentityResult result = await userManager.CreateAsync(user, userDto.Password);
                 if (result.Succeeded)
                 {
