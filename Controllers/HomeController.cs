@@ -1,6 +1,8 @@
 ﻿using Library.DTO;
 using Library.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +14,12 @@ namespace Library.Controllers
     {
         private readonly LibraryDbContext Db;
         private readonly IWebHostEnvironment _hostEnvironment;
-        public HomeController(LibraryDbContext _Db, IWebHostEnvironment hostEnvironment)
+        private readonly UserManager<ApplicationUser> userManager;
+        public HomeController(LibraryDbContext _Db, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> _userManager)
         {
             Db = _Db;
             _hostEnvironment = hostEnvironment;
+            this.userManager = _userManager;
         }
         [HttpGet]
         public IActionResult GetBooks()
@@ -152,28 +156,31 @@ namespace Library.Controllers
             }
             return Ok(Authors);
         }
+        [HttpGet("GetUserData")]
+        [Authorize]
+        public IActionResult GetUserImg()
+        {
+            var username = userManager.GetUserName(User);
+            
+            var userImagePath = Path.Combine(_hostEnvironment.WebRootPath, "UserImg", username+".jpeg").Replace('\\', '/');
+            if (System.IO.File.Exists(userImagePath))
+            {
+                var fileExtension = Path.GetExtension(userImagePath);
+                UserImgDto userImgDto = new UserImgDto()
+                {
+                    Img = $"{Request.Scheme}://{Request.Host}/img/{userManager.GetUserName(User)}{fileExtension}"
+                };
+                return Ok(userImgDto);
+            }
+            else
+            {
+                return NotFound("no image uploaded for this user");
+            }
+            
+        }
         
 
-        //pdf
-        //[HttpGet]
-        //[Route("api/pdf/{filename}")]
-        //public IActionResult GetPdf(string filename)
-        //{
-        //    // Get the path to the PDF file in the wwwroot folder
-        //    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filename);
-
-        //    // Check if the file exists
-        //    if (!System.IO.File.Exists(filePath))
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Return the PDF file as a FileStreamResult
-        //    var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-        //    var streamResult = new FileStreamResult(fileStream, "application/pdf");
-        //    return streamResult;
-        //}
-
+        
 
 
     }
