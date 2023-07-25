@@ -43,7 +43,7 @@ namespace Library.Controllers
                 var fileExtension = Path.GetExtension(userImagePath);
                 UserInfoDto userImgDto = new UserInfoDto()
                 {
-                    Img = $"{Request.Scheme}://{Request.Host}/img/{userManager.GetUserName(User)}{fileExtension}",
+                    Img = $"{Request.Scheme}://{Request.Host}/UserImg/{userManager.GetUserName(User)}{fileExtension}",
                     Username = userNow.UserName,
                     Email = userNow.Email,
                     PhoneNumber = userNow.PhoneNumber,
@@ -52,7 +52,14 @@ namespace Library.Controllers
             }
             else
             {
-                return NotFound("no image uploaded for this user");
+                UserInfoDto userImgDto = new UserInfoDto()
+                {
+                    Img = $"{Request.Scheme}://{Request.Host}/UserImg/defaultImg.JPEG",
+                    Username = userNow.UserName,
+                    Email = userNow.Email,
+                    PhoneNumber = userNow.PhoneNumber,
+                };
+                return Ok(userImgDto);
             }
 
         }
