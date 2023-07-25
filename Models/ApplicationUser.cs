@@ -7,5 +7,7 @@ namespace Library.Models
         public string Gender { get; set; }
         public string ImgUrl { get; set; }
         public int Age { get; set; }
+        public string ImgExten { get; set; }
+        
     }
 }
