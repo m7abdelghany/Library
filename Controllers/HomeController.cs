@@ -156,28 +156,7 @@ namespace Library.Controllers
             }
             return Ok(Authors);
         }
-        [HttpGet("GetUserData")]
-        [Authorize]
-        public IActionResult GetUserImg()
-        {
-            var username = userManager.GetUserName(User);
-            
-            var userImagePath = Path.Combine(_hostEnvironment.WebRootPath, "UserImg", username+".jpeg").Replace('\\', '/');
-            if (System.IO.File.Exists(userImagePath))
-            {
-                var fileExtension = Path.GetExtension(userImagePath);
-                UserImgDto userImgDto = new UserImgDto()
-                {
-                    Img = $"{Request.Scheme}://{Request.Host}/img/{userManager.GetUserName(User)}{fileExtension}"
-                };
-                return Ok(userImgDto);
-            }
-            else
-            {
-                return NotFound("no image uploaded for this user");
-            }
-            
-        }
+        
         
 
         
