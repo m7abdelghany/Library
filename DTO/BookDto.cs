@@ -7,5 +7,7 @@
         public string Image { get; set; }
         public string Description { get; set; }
         public string PDF { get; set; }
+        public string BookAuthor { get; set; }
+        public string BookCate { get; set; }
     }
 }

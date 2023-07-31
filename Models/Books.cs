@@ -16,6 +16,7 @@ namespace Library.Models
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public virtual Author Author { get; set; }
+        public ICollection<FavBooks> FavBooks { get; set; }
 
     }
 }

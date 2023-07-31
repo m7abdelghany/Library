@@ -8,6 +8,8 @@ namespace Library.Models
         [Key]
         public int Authorid { get; set; }
         public string Authorname { get; set; }
+        public string? Describtion { get; set; }
+        public string? Label { get; set; }
 
         public virtual ICollection<Books> ListOfBooks { get; set; }
     }

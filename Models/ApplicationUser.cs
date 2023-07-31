@@ -9,5 +9,6 @@ namespace Library.Models
         public int Age { get; set; }
         public string ImgExten { get; set; }
         
+        public ICollection<FavBooks> FavBooks { get; set; }
     }
 }
