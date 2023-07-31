@@ -1,0 +1,164 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  background-color: rgb(191, 219, 254);
+}
+
+.nav-link {
+  color: #000;
+}
+
+.home {
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  justify-content: center;
+}
+
+.containerHome div {
+  height: 100%;
+}
+
+.height-img {
+  height: 100%;
+}
+
+.btn-start {
+  background-color: rgb(191, 219, 254);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 42px !important;
+}
+
+.btn-start:hover {
+  background-color: #8ebdc7 !important;
+}
+
+.home h2 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.home p {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(78, 78, 78);
+}
+
+.overlay {
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.item:hover .overlay {
+  top: 0;
+}
+
+.item {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.item img {
+  transition: all 0.3s;
+}
+
+.item:hover img {
+  transition: scale(1.3);
+}
+
+.vote {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  color: rgb(167, 167, 167);
+  background-color: #FEFF86;
+}
+
+.libraryImg-login {
+  background-image: url('imgs/ranurte-a-CnhYgTenY-unsplash.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.libraryImg-register {
+  background-image: url('imgs/photo-1543002588-bfa74002ed7e.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+form {
+  color: rgb(44, 44, 44);
+  background-color: rgb(191, 219, 254);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-control {
+  padding: 10px !important;
+  border-radius: 10px !important;
+}
+
+.bg-color {
+  background-color: rgb(191, 219, 254);
+}
+
+.form-content {
+  padding: 30px 40px 10px 50px;
+}
+
+.btn {
+  background-color: rgb(191, 219, 254);
+}
+
+.btn:hover {
+  background-color: rgb(191, 219, 254);
+}
+
+.div-content {
+  height: 90vh;
+}
+
+.up {
+  font-size: smaller;
+  color: #3a5b63;
+}
+
+.height-author {
+  height: 590px;
+}
+
+.height-author .allAuthors {
+  height: 100%;
+  overflow-y: scroll;
+}
+.layerimg{
+width: 150px;
+height: 150px;
+}
+.layerimg .imguser{
+  width: 100%;
+  height: 100%;
+  }
