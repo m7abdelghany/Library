@@ -44,7 +44,7 @@ export default function Resigister() {
 if(data == "account created"){
   setisLoading(false);
 setapiError(null);
-Navigate("/");
+Navigate("/login");
 }else{
   setapiError(data.response.data.description)
   setisLoading(false)
@@ -78,8 +78,8 @@ Navigate("/");
           <div className="col-6 bg-color">
 
             <div className="form-content ">
-            <h2 className='text-left'>
-                Sign <span className='up'>Up</span>
+            <h2 className='text-left text-2xl font-semibold text-slate-900'>
+                Sign <span className='text-lg font-bold text-slate-700'>Up</span>
               </h2>
               {apiError && <div className='alert alert-danger'>{apiError}</div>}
               <form className=' mt-4' onSubmit={register}> 

@@ -31,8 +31,7 @@ function App() {
           [{ index: true  , element: <PersonalData/> },
           { path: "favouriteBooks"  , element: <FavouriteBooks/> }] },
           { path: "authors"  , element: <Authors/> },
-          { path: "authors/:authorName"  , element: <AuthorsBooks/> }
-
+          { path: "authors/:authorName"  , element: <AuthorsBooks/> } 
         ],
       }
     ])

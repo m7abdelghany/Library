@@ -18,6 +18,7 @@ const userinfoSlice = createSlice({
     });
     builder.addCase(getData.rejected, (state, action) => {
       // Handle rejection here
+      
     });
   },
 });

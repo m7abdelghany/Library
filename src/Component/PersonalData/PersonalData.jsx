@@ -31,7 +31,6 @@ export default function PersonalData() {
           },
         }
       );
-
       console.log('Upload successful');
       location.reload();
 

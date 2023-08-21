@@ -3,21 +3,15 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../Redux/CounterSlice';
-import { useEffect, useState } from 'react';
-
+import { removeToken } from '../../Redux/SignoutSlice';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 export default function Example() {
-  const navigate = useNavigate();
-  let dispatch = useDispatch();
   let { dataUser } = useSelector((state) => state.dataUser);
-  console.log(dataUser);
+  let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getData());
-  }, []);
-  function removeToken() {
-    localStorage.removeItem("token");
-    navigate("login");
-    location.reload();
-  }
+  }, [dispatch]); 
+  const navigate = useNavigate();
   const navigation = [
     { name: 'Books', href: 'books', current: false },
     { name: 'Authors', href: 'authors', current: false },
@@ -86,7 +80,7 @@ export default function Example() {
                           {item.name}
                           <svg
                             className={classNames(
-                              open ? '-mr-1 mt-1 transform rotate-180' : 'ml-1 mt-1',
+                              open ? '-mr-1  transform rotate-180' : 'ml-1 ',
                               'h-5 w-5 transition duration-150 ease-in-out'
                             )}
                             viewBox="0 0 20 20"
@@ -163,7 +157,7 @@ export default function Example() {
              
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
              
-                {dataUser?
+                {/* {dataUser?
                 <>
 <div className="flex items-center space-x-4">
 
@@ -209,9 +203,9 @@ export default function Example() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link to='login'
-                          onClick={removeToken}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <Link
+                          onClick={handleSignout}
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
                           </Link>
@@ -245,10 +239,96 @@ export default function Example() {
                       </Link>
                     ))}
                   </div>
-                </div>}
+                </div>} */}
   
 
+                {localStorage.getItem("token")&&dataUser?
+                <>
+<div className="flex items-center space-x-4">
 
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src={dataUser?.img}
+                        alt=""
+                      />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to='profile'
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Your Profile
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Settings
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link to="login"
+                          onClick={() => {dispatch(removeToken());}}
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Sign out
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+
+                    <div className="font-medium dark:text-white">
+        <div>{dataUser?.username}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">{dataUser?.email}</div>
+    </div>
+</div>
+
+
+              </>
+                :
+                <>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {Registerion.map((itemLogin) => (
+                      <Link
+                        key={itemLogin.name}
+                        to={itemLogin.href}
+                        className={classNames(
+                          itemLogin.current ? 'bg-blue-300 text-white' : 'text-gray-600 hover:bg-blue-300 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
+                        )}
+                        aria-current={itemLogin.current ? 'page' : undefined}
+                      >
+                        {itemLogin.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                </>
+                }
 
 
 

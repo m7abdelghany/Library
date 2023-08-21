@@ -23,6 +23,7 @@ export default function Login() {
     if (vaildation()) {
       setisLoading(true)
       let { data } = await axios.post(`https://localhost:7241/api/Account/login`, user);
+      console.log(data)
 if(data.token){
   setisLoading(false);
 setapiError(null);
@@ -49,14 +50,14 @@ function vaildation() {
   };
   return (
     <>
-      <div className="container-fluid ">
+      <div className="container-fluid">
         <div className="row div-content">
           <div className="col-6 libraryImg-login">
           </div>
           <div className="col-6 bg-color ">
             <div className="form-content ">
-              <h2 className='text-center mt-5'>
-                Welcome back
+              <h2 className='text-center mt-5 text-2xl text-blue-900  font-bold'>
+                Welcome Back
               </h2>
               {apiError && <div className='alert alert-danger'>{apiError}</div>}
               <form className=' mt-5' onSubmit={Login}> 

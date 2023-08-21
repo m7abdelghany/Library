@@ -7,28 +7,24 @@ export default function Home() {
   return (
 
     <>
-      <Helmet>
-        <title>Medo</title>
-      </Helmet>
 
-      <div className="container containerHome">
-        <div className="row p-5">
-          <div className="col-xl-6">
-            <div className="d-flex home">
-              <h2>Readers are Leaders</h2>
-              <p>
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 ">
+            <div className="d-flex home lg:p-16 max-sm:p-0 max-sm:text-center max-sm:my-3  max-sm:justify-self-center align-middle h-full max-sm:w-100 ">
+              <h2 className='lg:text-7xl max-md:text-6xl  max-sm:text-3xl	' >Readers are Leaders</h2>
+              <p className='my-3' >
                 we pride ourselves as one of the top best rated online library platform with over 50,000 collections of books and research documentary, from world best Authors.
               </p>
-              <Link to="books" className="btn btn-start mt-2">
+              <div className="d-flex justify-center">
+              <Link to="books" className="btn btn-start mt-2 ">
                 Get Started
               </Link>
+              </div>
             </div>
-          </div>
-          <div className="col-xl-6 ">
-            <img className="rounded-4 height-img w-100" src={homeImg} alt="Home Image" />
+         
+          <div className="p-28 box-content  md:block max-sm:hidden  ">
+            <img className="rounded-4 " src={homeImg} alt="Home Image" />
           </div>
         </div>
-      </div>
 
     </>
   );

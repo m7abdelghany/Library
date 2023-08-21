@@ -54,7 +54,7 @@ export default function Book() {
                   <tbody>
                     <tr>
                       <td > التقيم</td>
-                      <td>{Details?.rating}</td>
+                      <td>{Details?.rating}z</td>
                     </tr>
                     <tr>
                       <td> نوع الملف</td>
